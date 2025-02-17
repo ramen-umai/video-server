@@ -1,15 +1,17 @@
 const express = require('express');
 const app = express();
+const path = require('path');
 
-// サーバーのポート番号（好きな番号に変更可）
-const PORT = 3000;
+// 静的ファイルを提供する
+app.use(express.static(path.join(__dirname, 'public')));
 
-// ルートURLにアクセスしたときの処理
+// ルートにアクセスしたときにindex.htmlを表示
 app.get('/', (req, res) => {
-    res.send('動画配信サーバーへようこそ！');
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
-// サーバーを起動
-app.listen(PORT, () => {
-    console.log(`サーバーが http://localhost:${PORT} で起動しました！`);
+// サーバー起動
+const port = process.env.PORT || 3000;
+app.listen(port, () => {
+    console.log(`Server is running on port ${port}`);
 });
