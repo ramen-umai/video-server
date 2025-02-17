@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>動画再生リスト</title>
+    <style>
+        /* シンプルなCSSで再生リストをスタイリング */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        #video-player {
+            width: 100%;
+            max-width: 800px;
+            margin: 20px 0;
+            background-color: #000;
+        }
+        #video-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        #video-list li {
+            padding: 10px;
+            background-color: #fff;
+            margin: 5px 0;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        #video-list li:hover {
+            background-color: #ddd;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>動画再生リスト</h1>
+    
+    <!-- 動画プレーヤー -->
+    <video id="video-player" controls>
+        <source id="video-source" src="video1.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+    
+    <!-- 再生リスト -->
+    <ul id="video-list">
+        <li data-video="SuffleMart.mp4">シャッフルマート広告</li>
+        <li data-video="video2.mp4">動画2</li>
+        <li data-video="video3.mp4">動画3</li>
+    </ul>
+
+    <script>
+        // 動画リストをクリックしたときに、動画ソースを変更する
+        const videoList = document.getElementById('video-list');
+        const videoPlayer = document.getElementById('video-player');
+        const videoSource = document.getElementById('video-source');
+
+        videoList.addEventListener('click', (event) => {
+            // クリックされたリストアイテムのデータを取得
+            if (event.target && event.target.tagName === 'LI') {
+                const videoFile = event.target.getAttribute('data-video');
+                // 動画ソースを変更して再生
+                videoSource.src = videoFile;
+                videoPlayer.load();  // 動画を再読み込み
+                videoPlayer.play();  // 動画を再生
+            }
+        });
+    </script>
+</body>
+</html>
